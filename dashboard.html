@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Desempenho do Aluno</h2>
+
+        <div class="profile">
+            <label for="upload" class="profile-circle">
+                <img id="profile-img" src="css/img/perfil3.jpg" alt="Foto de Perfil">
+            </label>
+            <input type="file" id="upload" accept="image/*" style="display:none;">
+        </div>
+
+        <p>Nome do Aluno: Leonardo Erminio</p>
+        <p>Ano Escolar: 3° Médio</p>
+
+        <div id="charts" class="charts" style="margin-top:20px;"></div>
+
+        <h3>Registrar Ocorrência</h3>
+        <form class="ocorrencia-form">
+            <label for="horario">Horário:</label>
+            <input type="time" id="horario" name="horario">
+
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data">
+
+            <label for="materia">Matéria:</label>
+            <select id="materia" name="materia">
+                <option value="">Selecione</option>
+                <option value="matematica">Matemática</option>
+                <option value="portugues">Português</option>
+                <option value="filosofia">Filosofia</option>
+                <option value="fisica">Física</option>
+                <option value="quimica">Química</option>
+                <option value="biologia">Biologia</option>
+                <option value="historia">História</option>
+                <option value="redacao">Redação</option>
+            </select>
+
+            <label for="motivo">Motivo:</label>
+            <select id="motivo" name="motivo">
+                <option value="">Selecione</option>
+                <option value="mal-comportamento">Mal-comportamento</option>
+                <option value="atraso">Atraso</option>
+                <option value="conversa">Conversa</option>
+                <option value="materiais">Materiais</option>
+            </select>
+
+            <textarea placeholder="Descreva a ocorrência"></textarea>
+            
+            <button type="submit" class="btn" 
+                    onclick="alert('Ocorrência salva com sucesso! O desempenho será atualizado nos gráficos após a verificação com a Diretoria .'); return false;">
+                Salvar Ocorrência
+            </button>
+        </form>
+
+        <a href="index.html" class="btn back">Voltar</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... (Seu código Plotly e de Upload de Foto) ...
+            
+            // Dados fictícios para gráfico circular
+            const data = [{
+                values: [25, 20, 15, 10, 20, 10], // porcentagens fictícias
+                labels: ['Humanas', 'Natureza', 'Matemática', 'Português', 'Gerais', 'Comportamento'],
+                type: 'pie',
+                textinfo: 'label+percent',
+                hole: 0.3 // gráfico tipo donut
+            }];
+
+            const layout = {
+                title: 'Desempenho do Aluno',
+                height: 400,
+                width: 400
+            };
+
+            if (document.getElementById('charts')) {
+                Plotly.newPlot('charts', data, layout);
+            }
+
+            const uploadInput = document.getElementById('upload');
+            const profileImg = document.getElementById('profile-img');
+
+            if (uploadInput && profileImg) {
+                uploadInput.addEventListener('change', (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            profileImg.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

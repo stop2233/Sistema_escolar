@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Cadastro</title>
+<link rel='stylesheet' href='css/style.css'>
+</head>
+<body>
+<div class='container'>
+<h2>Cadastro</h2>
+<form id="cadastroForm">
+    <input type='text' placeholder='Nome' required>
+    <input type='email' placeholder='Email' required>
+    <input type='password' placeholder='Senha' required>
+    
+    <button type='submit' class='btn' onclick="showNoticeAndRedirect('login.html'); return false;">
+        Cadastrar
+    </button>
+</form>
+
+<a href='index.html' class='btn back'>Voltar</a>
+</div>
+
+<script>
+    /**
+     * Função JavaScript que mostra um alerta e redireciona o usuário.
+     * @param {string} destinationUrl - A URL da página de destino (neste caso, login.html).
+     */
+    function showNoticeAndRedirect(destinationUrl) {
+        // 1. Mostrar a caixa de aviso de sucesso do cadastro
+        alert('Cadastro realizado com sucesso! Você será redirecionado para a página de Login.');
+        
+        // 2. Redirecionar para a página de Login
+        window.location.href = destinationUrl;
+    }
+</script>
+</body>
+</html>
